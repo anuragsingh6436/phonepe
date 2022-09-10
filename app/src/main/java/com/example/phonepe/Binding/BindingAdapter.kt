@@ -10,30 +10,42 @@ import com.example.phonepe.base.BaseRecyclerItem
 import com.squareup.picasso.Picasso
 
 
-@BindingAdapter(value = ["imageUrl"],requireAll = false)
-fun getImage(view:AppCompatImageView,imageUrl:String) {
+@BindingAdapter(value = ["imageUrl"], requireAll = false)
+fun getImage(view: AppCompatImageView, imageUrl: String) {
     val url = "https://image.tmdb.org/t/p/original/${imageUrl}"
-    Log.d("tag4",url)
+    Log.d("tag4", url)
     Picasso.get()
         .load(url)
         .into(view)
 }
 
-@BindingAdapter(value = ["adapter","itemsList"],requireAll = true)
-fun updateRecyclerView(recyclerView: RecyclerView, adapter: BaseAdapter, itemsList:ArrayList<BaseRecyclerItem>) {
-    if(recyclerView.adapter == null) recyclerView.adapter = adapter
-    if(itemsList.isNotEmpty()){
+@BindingAdapter(value = ["adapter", "itemsList"], requireAll = true)
+fun updateRecyclerView(
+    recyclerView: RecyclerView,
+    adapter: BaseAdapter,
+    itemsList: ArrayList<BaseRecyclerItem>
+) {
+    if (recyclerView.adapter == null) recyclerView.adapter = adapter
+    if (itemsList.isNotEmpty()) {
         adapter.setItems(itemsList)
     }
 }
 
-@BindingAdapter(value = ["visibleGone"],requireAll = true)
-fun toggleView(view:View,visible:Boolean) {
-    if(visible)View.VISIBLE else View.GONE
+@BindingAdapter(value = ["visibleGone"], requireAll = true)
+fun toggleView(view: View, visible: Boolean) {
+    if (visible) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
+    }
 }
 
-@BindingAdapter(value = ["visibleGoneByText"],requireAll = true)
-fun toggleViewByText(view: View,text:String?) {
-    if(text.isNullOrEmpty())View.GONE else View.VISIBLE
+@BindingAdapter(value = ["visibleGoneByText"], requireAll = true)
+fun toggleViewByText(view: View, text: String?) {
+    if (text.isNullOrEmpty()) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
+    }
 }
 

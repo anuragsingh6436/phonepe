@@ -48,11 +48,20 @@ class MainActivity : AppCompatActivity() {
             ActivityEvent.API_ERROR -> {
                 showToastError()
             }
+            ActivityEvent.OPEN_PLAYLIST_FRAGMENT -> {
+                openPlayListFragment()
+            }
         }
     }
 
     private fun showToastError() {
         Toast.makeText(this, Constants.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
+    }
+
+    private fun openPlayListFragment() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, PlayListFragment.getInstance(), PlayListFragment.TAG)
+            .addToBackStack(PlayListFragment.TAG).commitAllowingStateLoss()
     }
 
 }
